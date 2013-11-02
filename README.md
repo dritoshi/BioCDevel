@@ -1,4 +1,4 @@
-Ubuntu 13.10 (64 bit) for Bioconductor Package Developer on AWS EC2
+Linux distribution for Bioconductor Package Developer on AWS EC2
 
 # Setup
 ## requirements
@@ -7,6 +7,7 @@ Ubuntu 13.10 (64 bit) for Bioconductor Package Developer on AWS EC2
 - vagrant
 - chef-solo
 - knife-solo
+- Berkshelf
 
 ## configuration
 - make a kaypair and download your private key
@@ -18,7 +19,11 @@ Ubuntu 13.10 (64 bit) for Bioconductor Package Developer on AWS EC2
 ```
 git clone
 vagrant plugin install vagrant-aws
+vagrant plugin install vagrant-omnibus
+vagrant plugin install vagrant-berkshelf
+
 vagrant box add dummy https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box
+
 vagrant init
 ```
 
