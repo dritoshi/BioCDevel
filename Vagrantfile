@@ -5,7 +5,7 @@ require 'yaml'
 require 'pp'
 
 aws_conf = YAML.load_file('./aws.yaml')
-pp aws_conf
+# pp aws_conf
 
 VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
@@ -28,21 +28,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     override.ssh.private_key_path = aws_conf['ssh_private_key_path']
   end
   
-  config.omnibus.chef_version = :latest  
+  config.omnibus.chef_version = :latest
+  config.berkshelf.enabled = true
 
-  # Enable provisioning with chef solo, specifying a cookbooks path, roles
-  # path, and data_bags path (all relative to this Vagrantfile), and adding
-  # some recipes and/or roles.
-  #
-  # config.vm.provision :chef_solo do |chef|
-  #   chef.cookbooks_path = "../my-recipes/cookbooks"
-  #   chef.roles_path = "../my-recipes/roles"
-  #   chef.data_bags_path = "../my-recipes/data_bags"
-  #   chef.add_recipe "mysql"
-  #   chef.add_role "web"
-  #
-  #   # You may also specify custom JSON attributes:
-  #   chef.json = { :mysql_password => "foo" }
-  # end
+  config.vm.provision :chef_solo do |chef|
+    chef.run_list = [
+#      "recipe['default']",
+      "recipe[apt::default]",
+      "git"
+    ]
+  end
 
 end
