@@ -8,3 +8,6 @@ region: ap-northeast-1
 ami: ami-b945ddb8
 security_groups:
  - xxxxxx
+tags:
+ Name: BioC-devel
+  Description: Linux distribution for Bioconductor Package Developer

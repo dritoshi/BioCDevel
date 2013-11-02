@@ -5,6 +5,7 @@ require 'yaml'
 require 'pp'
 
 aws_conf = YAML.load_file('./aws.yaml')
+pp aws_conf
 
 VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
@@ -18,11 +19,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     aws.ami                  = aws_conf['ami']
     aws.region               = aws_conf['region']
     aws.security_groups      = aws_conf['security_groups']
+    aws.tags = {
+      'Name'        => aws_conf['tags']['Name'],
+      'Description' => aws_conf['tags']['Description']
+    }
 
     override.ssh.username         = aws_conf['ssh_username']
     override.ssh.private_key_path = aws_conf['ssh_private_key_path']
-    
   end
+  
+  config.omnibus.chef_version = :latest  
 
   # Enable provisioning with chef solo, specifying a cookbooks path, roles
   # path, and data_bags path (all relative to this Vagrantfile), and adding
