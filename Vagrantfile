@@ -33,9 +33,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provision :chef_solo do |chef|
     chef.run_list = [
-#      "recipe['default']",
       "recipe[apt::default]",
-      "git"
+      "git",
+      "base"
     ]
   end
 

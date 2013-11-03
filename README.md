@@ -32,6 +32,8 @@ vagrant init
 vagrant up --provider=aws    # run a AMI on Amazon EC2
 vagrant ssh                  # access to your virtual machine (VM) by ssh
 
+vagrant status               # check status of VM
+
 vagrant halt                 # stop your VM on Amazon EC2
 vagrant reload               # restart your VM on Amazon EC2
 
